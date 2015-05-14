@@ -1,4 +1,4 @@
-package com.hydom.common.control;
+package com.hydom.core.control;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

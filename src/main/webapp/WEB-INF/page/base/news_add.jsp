@@ -61,9 +61,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     
                     <div class="contentpanel">
                     	<div class="content-l">
+                    		<form action="/andudu/upload/image" method="post" enctype="multipart/form-data">
 							<textarea name="editor1" id="editor1" rows="10" cols="80">
 				                This is my textarea to be replaced with CKEditor.
 				            </textarea>
+				            <input type="file" name="himage" onchange="ajaxupload()"> 
+				            <input type="submit" value="sub">
+                    		</form>
                     	</div>
                     </div><!-- contentpanel -->
                     <div class="bottomwrapper" >
@@ -89,8 +93,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         <script src="${pageContext.request.contextPath}/resource/chain/js/custom.js"></script>
         <script src="${pageContext.request.contextPath}/resource/ckeditor/ckeditor.js"></script>
+        <script src="${pageContext.request.contextPath}/resource/js/ajaxfileupload.js"></script>
         <script type="text/javascript">
         	CKEDITOR.replace( 'editor1');
+
         </script>
     </body>
     
