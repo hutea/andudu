@@ -28,10 +28,10 @@ public class StringUtil {
 	}
 
 	public static String generatorID() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss-");
 		Date date = new Date();
 		String dateStr = sdf.format(date);
-		String id = dateStr + getRandomString(3);
+		String id = dateStr + getRandomString(8);
 		return id;
 	}
 

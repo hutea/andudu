@@ -212,7 +212,9 @@ jQuery
 		})
 
 // 自定义的相关函数
-function ajaxupload() {
+function imageUpload() {
+	$("#himage-tip").css("display","");
+	$("#himage").css("display","none");
 	$.ajaxFileUpload( {
 		url : '/andudu/upload/image', // 用于文件上传的服务器端请求地址
 		type : 'post',
@@ -226,6 +228,8 @@ function ajaxupload() {
 		success : function(data, status) // 服务器成功响应处理函数
 		{
 			$("#himage-upload-image").attr("src", data.url);
+			$("#himage-tip").css("display","none");
+			$("#himage").css("display","");
 			if (typeof (data.error) != 'undefined') {
 				if (data.error != '') {
 					alert(data.error);

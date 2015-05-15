@@ -14,8 +14,18 @@ CKEDITOR.dialog.add('himageDialog',
 						        {
 						        	type: 'text',
 						            label: '地址',
+						            id:'himage-netimage-input-src',
 						            labelLayout: 'horizontal',
-						            widths: [20, 200]
+						            widths: [20, 200],
+						            onBlur:function (){
+										var imgsrc =  this.getValue();
+										var re =new RegExp("^.*[^a][^b][^c]\.(?:png|jpg|bmp|gif|jpeg)$"); 
+										if(re.test(imgsrc)){
+											$("#himage-netimage-image").attr("src",imgsrc);
+										}else if(imgsrc.length>1){
+											//alert("非图片地址");
+										}
+						        	}
 						        },
 						        {
 						        	type: 'hbox',
@@ -28,18 +38,21 @@ CKEDITOR.dialog.add('himageDialog',
 												              {
 												            	  	type: 'text',
 												            	    label: '宽(px)',
+												            	    id:'himage-netimage-input-width',
 												            	    labelLayout: 'horizontal',
 												            	    widths: [100, 200]
 												              },
 												              {
 												            	  	type: 'text',
 												            	    label: '高(px)',
+												            	    id:'himage-netimage-input-heigth',
 												            	    labelLayout: 'horizontal',
 												            	    widths: [100, 200]
 												              },
 												              {
 												            	  	type: 'text',
 												            	    label: '描述',
+												            	    id:'himage-netimage-input-detail',
 												            	    labelLayout: 'horizontal',
 												            	    widths: [100, 200]
 												              }
@@ -47,7 +60,7 @@ CKEDITOR.dialog.add('himageDialog',
 						                       } ,
 						                       {
 						                    	   type: 'html',
-										           html: '<span><img style="width:300px;" src="http://i2.tietuku.com/79c749978160b131.jpg"></span>',
+										           html: '<span><img id="himage-netimage-image" style="width:300px;" src="/andudu/resource/image/preview_net.png"></span>',
 						                       }
 						            ]
 						        },
@@ -59,11 +72,12 @@ CKEDITOR.dialog.add('himageDialog',
 					elements : [ 
 						{
 							type: 'html',
-			            	html: '<input id="himage" type="file" name="himage" onchange="ajaxupload()">',
+			            	html: '<input id="himage" type="file" name="himage" onchange="imageUpload()">'
+			            		 +'<span id="himage-tip" style="color:red;display:none;">正在上传...</span>',
 						},
 						{
 							type: 'html',
-			            	html: '<img id="himage-upload-image" style="width:400px;height:300px" src="http://i2.tietuku.com/79c749978160b131.jpg">',
+			            	html: '<img id="himage-upload-image" style="width:400px;height:200px" src="/andudu/resource/image/preview_local.png">',
 						},
 						{
 							type: 'html',
@@ -73,16 +87,24 @@ CKEDITOR.dialog.add('himageDialog',
 				} ],
 				onOk : function() {
 					var dialog = this;
-					var abbr = editor.document.createElement('abbr');
-					abbr.setAttribute('title', dialog.getValueOf('tab-basic',
-							'title'));
-					abbr.setText(dialog.getValueOf('tab-basic', 'abbr'));
-
-					var id = dialog.getValueOf('tab-adv', 'id');
-					if (id)
-						abbr.setAttribute('id', id);
-
-					editor.insertElement(abbr);
+					var localImg = editor.document.createElement('img');
+					var localImgSrc =$("#himage-upload-image").attr("src");
+					if(localImgSrc.indexOf("preview_local.png")==-1){
+						localImg.setAttribute('src',localImgSrc);
+						editor.insertElement(localImg);
+					}
+					//网络图片
+					var netImg = editor.document.createElement('img');
+					var netImgSrc = $("#himage-netimage-image").attr("src"); 
+					if(netImgSrc.indexOf("preview_net.png")==-1){
+						netImg.setAttribute('src',netImgSrc);
+						var width = $("#himage-netimage-input-width").attr("value");
+						var height = $("#himage-netimage-input-height").attr("value");
+						var title = $("#himage-netimage-input-title").attr("value");
+						netImg.setAttribute('title',title);
+						netImg.setAttribute('style',"width:"+width+"px;heigth:"+height+"px");
+						editor.insertElement(netImg);
+					}
 				}
 			};
 		});

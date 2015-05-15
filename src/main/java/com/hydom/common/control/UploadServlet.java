@@ -36,12 +36,10 @@ public class UploadServlet {
 		File tempFile = new File(request.getSession().getServletContext().getRealPath(filePath));
 		try {
 			FileUtils.copyInputStreamToFile(himage.getInputStream(), tempFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("url", request.getContextPath() + "/" + filePath);
-		try {
+			Map<String, Object> dataMap = new HashMap<String, Object>();
+
+			dataMap.put("url", request.getContextPath() + "/" + filePath);
+			dataMap.put("title", oriname);
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(dataMap);
 			return json;

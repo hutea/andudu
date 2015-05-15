@@ -60,13 +60,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div><!-- pageheader -->
                     
                     <div class="contentpanel">
-                    	<div class="content-l">
-                    		<form action="/andudu/upload/image" method="post" enctype="multipart/form-data">
-							<textarea name="editor1" id="editor1" rows="10" cols="80">
-				                This is my textarea to be replaced with CKEditor.
-				            </textarea>
-				            <input type="file" name="himage" onchange="ajaxupload()"> 
-				            <input type="submit" value="sub">
+                    	<div class="content-m" style="border: 0">
+                    		<form action="/andudu/upload/image" class="form-horizontal" method="post" enctype="multipart/form-data">
+				             <div class="form-group">
+								    <label  class="col-sm-2 control-label">新闻标题</label>
+								    <div class="col-sm-4">
+								      <input type="text" class="form-control" name="trophy.name" placeholder="">
+								      <span></span>
+								    </div>
+							</div>
+				            <div class="form-group">
+								    <label  class="col-sm-2 control-label">新闻标志图</label>
+								    <div class="col-sm-4">
+								      <input type="file" class="form-control" name="trophy.name" placeholder="选择图片">
+								      <span></span>
+								    </div>
+							</div>
+				            <div class="form-group">
+								    <label  class="col-sm-2 control-label">新闻内容</label>
+								    <div class="col-sm-8">
+										<textarea name="editor1" id="editor1">
+											http://pica.nipic.com/2007-12-23/200712231523651_2.jpg
+							            </textarea>
+								    </div>
+								    <div class="col-sm-2"></div>
+							</div>
+				            <div class="form-group">
+								    <div class="col-sm-5"></div>
+								    <div class="col-sm-2">
+										<input type="reset" class="btn btn-primary btn-md" value="重置">
+										<input type="submit" class="btn btn-primary btn-md" value="提交">
+								    </div>
+								    <div class="col-sm-5"></div>
+							</div>
                     		</form>
                     	</div>
                     </div><!-- contentpanel -->
